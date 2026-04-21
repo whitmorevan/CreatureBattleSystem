@@ -1,16 +1,26 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
 
-        // set up the creatures
-        Creature a = new Orc();
-        Creature b = new Knight();
-        a.name = "Orc";
-        a.health = 100;
-        b.name = "Knight";
-        b.health = 100;
-
-        // set up the battle
+        Scanner scn = new Scanner(System.in);
         BattleSystem battleSystem = new BattleSystem();
+
+        System.out.println("Choose your creature: ");
+        System.out.println("1 - Orc");
+        System.out.println("2 - Knight");
+        System.out.println("3 - Gremlin");
+
+
+        int choice = scn.nextInt();
+        int enemyChoice = Rand.randomInt(1, 4);
+
+        Creature a = battleSystem.createCreature(choice);
+        Creature b = battleSystem.createCreature(enemyChoice);
+        b.name = "Enemy " + b.name;
+
+        System.out.println("An " + b.name + " appeared! \n");
+
 
         // run the battle
         battleSystem.battle(a, b);

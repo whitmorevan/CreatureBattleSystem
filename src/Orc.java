@@ -1,11 +1,12 @@
 public class Orc extends Creature{
-
+    // Orcs have much higher chances of missing, but much higher attack dmg
+    // 0 chance of defending
 
     // higher chance of missing, higher damage with successful hit
     @Override
     public float attack(){
-        // 50% chance of missing
-        if (Rand.randomInt(0, 10) < 5) {
+        // 40% chance of missing
+        if (Rand.randomInt(0, 10) < 4) {
             action = name + " missed!";
             return 0;
         }
@@ -16,13 +17,28 @@ public class Orc extends Creature{
         return power;
     }
 
+    @Override
+    public float heavyAttack(){
+        // 60% chance of missing
+        if (Rand.randomInt(0, 10) < 6) {
+            action = name + " missed!";
+            return 0;
+        }
+        // otherwise, do damage between 15-50
+        float power = Rand.randomFloat(15, 50);
+        action = name + " attacked wildly with power " + power + "!";
+        return power;
+    }
+
+
+
+
     // does not defend
     @Override
     public void defend(float incomingPower){
         action = name + " is a proper orc and does not believe in defending";
         health -= incomingPower;
     }
-
 
 
 
