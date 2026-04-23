@@ -22,7 +22,7 @@ public class Gremlin extends Creature{
             currHit++;
         }
 
-        action = name + " attacked " + numHits + " times, missed " + misses + " times, with a total power of " + power;
+        action = super.getName() + " attacked " + numHits + " times, missed " + misses + " times, with a total power of " + power;
         return power;
     }
 
@@ -45,7 +45,7 @@ public class Gremlin extends Creature{
             currHit++;
         }
 
-        action = name + " attacked wildly " + numHits + " times, missed " + misses + " times, with a total power of " + power;
+        action = super.getName() + " attacked wildly " + numHits + " times, missed " + misses + " times, with a total power of " + power;
         return power;
     }
 
@@ -58,19 +58,26 @@ public class Gremlin extends Creature{
         switch(dodgeSuccess) {
             case 10:
                 incomingPower = 0;
-                action = name + " dodged completely out of the way!";
+                action = super.getName() + " dodged completely out of the way!";
             case 7, 8, 9:
                 incomingPower = incomingPower * 0.5f;
-                action = name + " partially dodged and halved damage to " + incomingPower;
+                action = super.getName() + " partially dodged and halved damage to " + incomingPower;
             case 3, 4, 5, 6:
                 incomingPower = incomingPower * 0.8f;
-                action = name + " partially dodged and reduced damage to " + incomingPower;
+                action = super.getName() + " partially dodged and reduced damage to " + incomingPower;
             case 1, 2:
-                action = name + " couldn't dodge!";
+                action = super.getName() + " couldn't dodge!";
         }
 
-        health -= incomingPower;
+        super.takeDamage(incomingPower);
     }
+
+
+
+    public Gremlin(float health, String name){
+        super(health, name);
+    }
+
 }
 
 

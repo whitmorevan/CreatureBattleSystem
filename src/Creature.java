@@ -1,7 +1,7 @@
 public class Creature {
-    public float health = 100;
-    public String name;
-    public String action;
+    private float health;
+    private String name;
+    private String action;
 
 
     // Returns the damage done by the Creature
@@ -63,5 +63,27 @@ public class Creature {
     @Override
     public String toString() {
         return getClass() + "{name: " + name + ", health: " + health + "}";
+    }
+
+
+    public Creature(float health, String name){
+        this.health = health;
+        this.name = name;
+    }
+
+    public float getHealth(){
+        return health;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public void setAction(String action){
+        this.action = action;
+    }
+
+    public void takeDamage(Float attackPower){
+        health -= attackPower;
     }
 }

@@ -7,13 +7,13 @@ public class Orc extends Creature{
     public float attack(){
         // 40% chance of missing
         if (Rand.randomInt(0, 10) < 4) {
-            action = name + " missed!";
+            super.setAction(super.getName() + " missed!");
             return 0;
         }
 
         // otherwise, do damage between 10-40
         float power = Rand.randomFloat(10, 40);
-        action = name + " attacked with power " + power + "!";
+        super.setAction(super.getName() + " attacked with power " + power + "!");
         return power;
     }
 
@@ -21,12 +21,12 @@ public class Orc extends Creature{
     public float heavyAttack(){
         // 60% chance of missing
         if (Rand.randomInt(0, 10) < 6) {
-            action = name + " missed!";
+            super.setAction(super.getName() + " missed!");
             return 0;
         }
         // otherwise, do damage between 15-50
         float power = Rand.randomFloat(15, 50);
-        action = name + " attacked wildly with power " + power + "!";
+        super.setAction(super.getName() + " attacked wildly with power " + power + "!");
         return power;
     }
 
@@ -36,8 +36,14 @@ public class Orc extends Creature{
     // does not defend
     @Override
     public void defend(float incomingPower){
-        action = name + " is a proper orc and does not believe in defending";
-        health -= incomingPower;
+        super.setAction(super.getName() + " is a proper orc and does not believe in defending");
+        super.takeDamage(incomingPower);
+    }
+
+
+
+    public Orc(float health, String name){
+        super(health, name);
     }
 
 

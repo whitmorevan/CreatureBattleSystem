@@ -17,9 +17,9 @@ public class Main {
 
         Creature a = battleSystem.createCreature(choice);
         Creature b = battleSystem.createCreature(enemyChoice);
-        b.name = "Enemy " + b.name;
+        b.name = "Enemy " + b.getName();
 
-        System.out.println("An " + b.name + " appeared! \n");
+        System.out.println("An " + b.getName() + " appeared! \n");
 
 
         // run the battle

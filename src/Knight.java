@@ -6,13 +6,13 @@ public class Knight extends Creature{
 
         // 30% chance of missing
         if (Rand.randomInt(0, 10) < 2) {
-            action = name + " missed!";
+            super.setAction(super.getName() + " missed!");
             return 0;
         }
 
         // otherwise, do damage between 10-20
         float power = Rand.randomFloat(10, 20);
-        action = name + " stabbed with power " + power + "!";
+        super.setAction(super.getName() + " stabbed with power " + power + "!");
         return power;
     }
 
@@ -20,12 +20,12 @@ public class Knight extends Creature{
     public float heavyAttack(){
         // 40% chance of missing
         if (Rand.randomInt(0, 10) < 4) {
-            action = name + " missed!";
+            super.setAction(super.getName() + " missed!");
             return 0;
         }
         // otherwise, do damage between 10-30
         float power = Rand.randomFloat(10, 30);
-        action = name + " attacked fiercely with power " + power + "!";
+        super.setAction(super.getName() + " attacked fiercely with power " + power + "!");
         return power;
     }
 
@@ -38,14 +38,14 @@ public class Knight extends Creature{
         // 40 % chance of reducing damage taken
         if (Rand.randomInt(0, 40) < 1) {
             incomingPower = incomingPower * 0.8f;
-            action = name + " used their shield and reduced damage taken to " + incomingPower;
+            super.setAction(super.getName() + " used their shield and reduced damage taken to " + incomingPower);
         }
         else
         {
-            action = name + " did not defend.";
+            super.setAction(super.getName() + " did not defend.");
         }
 
-        health -= incomingPower;
+        super.takeDamage(incomingPower);
     }
 
     @Override
@@ -53,9 +53,14 @@ public class Knight extends Creature{
         // 20% chance to heal
         if (Rand.randomInt(0, 10) < 2){
             float healPower = Rand.randomFloat(0, 20);
-            action = name + " heals themself for " + healPower + " health!";
+            super.setAction(super.getName() + " heals themself for " + healPower + " health!");
             health += healPower;
         }
+    }
+
+
+    public Knight(float health, String name){
+        super(health, name);
     }
 
 }
