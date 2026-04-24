@@ -3,6 +3,12 @@ public class Creature {
     private String name;
     private String action;
 
+    public Creature(float health, String name){
+        this.health = health;
+        this.name = name;
+    }
+
+
 
     // Returns the damage done by the Creature
     public float attack() {
@@ -19,6 +25,7 @@ public class Creature {
         return power;
     }
 
+    // just like attack, but does more damage with a higher chance of missing
     public float heavyAttack(){
         // 30% chance of missing
         if (Rand.randomInt(0, 10) < 3) {
@@ -56,8 +63,10 @@ public class Creature {
     }
 
 
-    public String readAction() {
-        return action;
+
+
+    public void readAction() {
+        System.out.println(action);
     }
 
     @Override
@@ -65,25 +74,24 @@ public class Creature {
         return getClass() + "{name: " + name + ", health: " + health + "}";
     }
 
-
-    public Creature(float health, String name){
-        this.health = health;
-        this.name = name;
-    }
-
     public float getHealth(){
         return health;
+    }
+
+    public void takeDamage(Float attackPower){
+        health -= attackPower;
     }
 
     public String getName(){
         return name;
     }
 
-    public void setAction(String action){
+    public void setAsEnemy(){
+        name = "Enemy " + name;
+    }
+
+    public void queueAction(String action){
         this.action = action;
     }
 
-    public void takeDamage(Float attackPower){
-        health -= attackPower;
-    }
 }

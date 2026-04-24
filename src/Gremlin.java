@@ -2,6 +2,10 @@ public class Gremlin extends Creature{
     // Gremlins do many little attacks
     // and can dodge attacks fully
 
+    public Gremlin(float health, String name){
+        super(health, name);
+    }
+
 
     @Override
     public float attack() {
@@ -22,14 +26,14 @@ public class Gremlin extends Creature{
             currHit++;
         }
 
-        action = super.getName() + " attacked " + numHits + " times, missed " + misses + " times, with a total power of " + power;
+        queueAction(getName() + " attacked " + numHits + " times, missed " + misses + " times, with a total power of " + power);
         return power;
     }
 
     @Override
     public float heavyAttack(){
         // can hit 3-13 times
-        int numHits = Rand.randomInt(3, 13);
+        int numHits = Rand.randomInt(5, 13);
         int currHit = 0;
         int misses = 0;
         float power = 0;
@@ -45,7 +49,7 @@ public class Gremlin extends Creature{
             currHit++;
         }
 
-        action = super.getName() + " attacked wildly " + numHits + " times, missed " + misses + " times, with a total power of " + power;
+        queueAction(getName() + " attacked wildly " + numHits + " times, missed " + misses + " times, with a total power of " + power);
         return power;
     }
 
@@ -58,24 +62,18 @@ public class Gremlin extends Creature{
         switch(dodgeSuccess) {
             case 10:
                 incomingPower = 0;
-                action = super.getName() + " dodged completely out of the way!";
+                queueAction(getName() + " dodged completely out of the way!");
             case 7, 8, 9:
                 incomingPower = incomingPower * 0.5f;
-                action = super.getName() + " partially dodged and halved damage to " + incomingPower;
+                queueAction(getName() + " partially dodged and halved damage to " + incomingPower);
             case 3, 4, 5, 6:
                 incomingPower = incomingPower * 0.8f;
-                action = super.getName() + " partially dodged and reduced damage to " + incomingPower;
+                queueAction(getName() + " partially dodged and reduced damage to " + incomingPower);
             case 1, 2:
-                action = super.getName() + " couldn't dodge!";
+                queueAction(getName() + " couldn't dodge!");
         }
 
-        super.takeDamage(incomingPower);
-    }
-
-
-
-    public Gremlin(float health, String name){
-        super(health, name);
+        takeDamage(incomingPower);
     }
 
 }

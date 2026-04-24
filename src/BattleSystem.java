@@ -1,22 +1,23 @@
-import java.sql.SQLOutput;
-
 public class BattleSystem {
     public void battle(Creature a, Creature b) {
+        int turn = 1;
         while (a.getHealth() > 0 && b.getHealth() > 0) {
+            System.out.println("\n ~TURN " + turn + "~");
+
 
             float attackPower;
 
-            // 50/50 chance of doing a heavy or normal attack
-            if (Rand.randomInt(0, 2) == 1){
-                attackPower = a.attack();
-            }
-            else{
+            // 25/75 chance of doing a heavy or normal attack
+            if (Rand.randomInt(0, 4) == 0){
                 attackPower = a.heavyAttack();
             }
-            System.out.println(a.readAction());
+            else{
+                attackPower = a.attack();
+            }
+            a.readAction();
 
             b.defend(attackPower);
-            System.out.println(b.readAction());
+            b.readAction();
 
             b.heal();
 
@@ -29,26 +30,32 @@ public class BattleSystem {
             Creature temp = a;
             a = b;
             b = temp;
+
+            turn++;
+            Input.waitForUserToPressEnter("Hit enter to continue! ");
+        }
+
+        if (a.getHealth() < b.getHealth()){
+            System.out.println("\n" + a.getName() + " died!");
+        }
+        else{
+            System.out.println("\n" + b.getName() + " died!");
         }
     }
 
     public Creature createCreature(int choice){
         Creature creature;
         if (choice == 1) {
-            creature = new Orc();
-            creature.name = "Orc";
+            creature = new Orc(100, "Orc");
         }
         else if (choice == 2) {
-            creature = new Knight();
-            creature.name = "Knight";
+            creature = new Knight(100, "Knight");
         }
         else if (choice == 3) {
-            creature = new Gremlin();
-            creature.name = "Gremlin";
+            creature = new Gremlin(100, "Gremlin");
         }
         else {
-            creature = new Creature();
-            creature.name = "Creature";
+            creature = new Creature(100, "Creature");
         }
         return creature;
     }
